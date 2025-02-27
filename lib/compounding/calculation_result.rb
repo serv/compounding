@@ -20,12 +20,19 @@ module Compounding
     def populate_periods
       total_number_of_periods = @compounding_frequency * @time
       @periods = []
+      previous_total_full = @principal
       previous_total = @principal
+      total_full = @principal
 
       for n in 1..total_number_of_periods
-        period_interest = previous_total * @rate / @compounding_frequency
-        previous_total += period_interest
-        @periods.push(DTO::Period.new(n, previous_total, period_interest, previous_total))
+        period_interest = previous_total_full * @rate / @compounding_frequency
+        total_full += period_interest
+        total = total_full.round(2)
+
+        @periods.push(DTO::Period.new(n, previous_total_full, previous_total, period_interest, total_full, total))
+
+        previous_total_full = total_full
+        previous_total = total
       end
 
       @periods
