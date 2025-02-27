@@ -42,5 +42,13 @@ module Compounding
 
       @periods
     end
+
+    def calculate_interest
+      @interest = @periods.reduce(0) { |sum, period| sum + period.interest }
+    end
+
+    def calculate_total
+      @total = @periods.last.total
+    end
   end
 end
