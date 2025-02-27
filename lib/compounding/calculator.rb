@@ -1,4 +1,4 @@
-module Mortgagerb
+module Compounding
   class Calculator
     def self.calculate(principal, rate, time, compounding_frequency)
       cr = CalculationResult.new(principal, rate, time, compounding_frequency)
